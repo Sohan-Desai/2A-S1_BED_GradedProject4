@@ -63,6 +63,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().disable();
 		
 		http.authorizeRequests()
+		.antMatchers(GET, "/api/employee").hasAnyRole("USER", "ADMIN")
+		.antMatchers(GET, "/api/user/**").hasAnyRole("USER", "ADMIN")
+		.antMatchers(GET, "/api/role/**").hasAnyRole("USER", "ADMIN")
+		.and().authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/api/employee/**").hasRole("ADMIN")
 		.antMatchers(HttpMethod.PUT, "/api/employee/**").hasRole("ADMIN")
 		.antMatchers(HttpMethod.DELETE, "/api/employee/**").hasRole("ADMIN")
@@ -73,9 +77,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.PUT, "/api/role/**").hasRole("ADMIN")
 		.antMatchers(HttpMethod.DELETE, "/api/role/**").hasRole("ADMIN")
 		.and().authorizeRequests()
-		.antMatchers(GET, "/api/employee").hasAnyRole("USER", "ADMIN")
-		.antMatchers(GET, "/api/user/**").hasAnyRole("USER", "ADMIN")
-		.antMatchers(GET, "/api/role/**").hasAnyRole("USER", "ADMIN")
 		.antMatchers("/").anonymous()
 		.anyRequest().authenticated()
 		.and()
