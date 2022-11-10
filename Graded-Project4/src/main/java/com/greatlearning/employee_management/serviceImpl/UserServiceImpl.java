@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.greatlearning.employee_management.dao.UserRepository;
 import com.greatlearning.employee_management.model.User;
-import com.greatlearning.employee_management.repository.UserRepository;
 import com.greatlearning.employee_management.service.UserService;
 
 @Service

@@ -12,11 +12,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.greatlearning.employee_management.dao.EmployeeRepository;
+import com.greatlearning.employee_management.dao.UserRepository;
 import com.greatlearning.employee_management.model.Employee;
 import com.greatlearning.employee_management.model.Role;
 import com.greatlearning.employee_management.model.User;
-import com.greatlearning.employee_management.repository.EmployeeRepository;
-import com.greatlearning.employee_management.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

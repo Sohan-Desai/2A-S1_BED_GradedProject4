@@ -46,21 +46,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(customAuthenticationProvider());
 	}
 
+	//ignoring authentication for h2 as it has built-in authentication
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/h2-console/**");
 	}
 
+	/*
+	 * USER can only access GET mappings. All other mappings to be accessed by ADMIN
+	 * home "/" url can be accessed by even unauthenticated users
+	 */
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.cors().disable();
 		
 		http.authorizeRequests()
-		.antMatchers(GET, "/api/employee").hasAnyRole("USER", "ADMIN")
-		.antMatchers(GET, "/api/user/**").hasAnyRole("USER", "ADMIN")
-		.antMatchers(GET, "/api/role/**").hasAnyRole("USER", "ADMIN")
-		.and().authorizeRequests()
 		.antMatchers(HttpMethod.POST, "/api/employee/**").hasRole("ADMIN")
 		.antMatchers(HttpMethod.PUT, "/api/employee/**").hasRole("ADMIN")
 		.antMatchers(HttpMethod.DELETE, "/api/employee/**").hasRole("ADMIN")
@@ -70,6 +72,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.POST, "/api/role/**").hasRole("ADMIN")
 		.antMatchers(HttpMethod.PUT, "/api/role/**").hasRole("ADMIN")
 		.antMatchers(HttpMethod.DELETE, "/api/role/**").hasRole("ADMIN")
+		.and().authorizeRequests()
+		.antMatchers(GET, "/api/employee").hasAnyRole("USER", "ADMIN")
+		.antMatchers(GET, "/api/user/**").hasAnyRole("USER", "ADMIN")
+		.antMatchers(GET, "/api/role/**").hasAnyRole("USER", "ADMIN")
+		.antMatchers("/").anonymous()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin().permitAll();

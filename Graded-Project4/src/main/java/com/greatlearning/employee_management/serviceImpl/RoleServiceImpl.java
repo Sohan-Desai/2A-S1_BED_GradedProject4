@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.greatlearning.employee_management.dao.RoleRepository;
 import com.greatlearning.employee_management.model.Role;
-import com.greatlearning.employee_management.repository.RoleRepository;
 import com.greatlearning.employee_management.service.RoleService;
 
 @Service

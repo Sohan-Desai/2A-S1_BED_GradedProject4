@@ -21,11 +21,15 @@ public class MyUserDetails implements UserDetails {
 		this.user = user;
 	}
 
+	/*
+	 * creating a list of SimpleGrantedAuthority objects 
+	 * by passing it role names
+	 */
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		List<Role> roles = user.getRoles();
-		
+
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
 		for (Role role : roles)
@@ -44,6 +48,7 @@ public class MyUserDetails implements UserDetails {
 		return user.getUsername();
 	}
 
+	// Other fileds to be hardcoded
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;

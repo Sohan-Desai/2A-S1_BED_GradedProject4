@@ -37,15 +37,10 @@ public class EmployeeController {
 	}
 
 	@ApiOperation(value = "Find Single Employee by Id", notes = "This API allows you to find a single Employee by their Id from the employees table")
-	@GetMapping("/{id}")
+	@GetMapping("/{empId}")
 	// @RequestMapping(value = "/{empId}", method = GET)
 	public Employee findEmployeeById(@PathVariable("empId") long id) {
-		Employee theEmployee = employeeService.findEmployeeById(id);
-
-		if (theEmployee == null)
-			throw new RuntimeException("Employee with id " + id + " not found");
-
-		return theEmployee;
+		return employeeService.findEmployeeById(id);
 	}
 
 	@ApiOperation(value = "Add Single Employee", notes = "This API allows you to add a single Employee to the employees table")
@@ -69,7 +64,7 @@ public class EmployeeController {
 	}
 
 	@ApiOperation(value = "List Any Employees with Firstname", notes = "List any employees with firstname matching entered string")
-	@GetMapping("/{firstName}")
+	@GetMapping("/search/{firstName}")
 	// @RequestMapping(value = "/search/{firstName}", method = GET)
 	public List<Employee> listEmployeesByFirstName(@RequestParam(value = "firstName") String firstName) {
 		return employeeService.findEmployeesByFirstName(firstName);

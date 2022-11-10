@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.greatlearning.employee_management.dao.UserRepository;
 import com.greatlearning.employee_management.model.User;
-import com.greatlearning.employee_management.repository.UserRepository;
 import com.greatlearning.employee_management.userdetailsImpl.MyUserDetails;
 
 import lombok.RequiredArgsConstructor;
