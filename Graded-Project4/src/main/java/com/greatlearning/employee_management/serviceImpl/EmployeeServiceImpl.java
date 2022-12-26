@@ -36,7 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employee = result.get();
 		} else {
 			// we didn't find the employee
-			throw new RuntimeException("Did not find employee with id - " + id);
+			throw new IllegalArgumentException("Did not find employee with id - " + id);
 		}
 		return employee;
 	}
@@ -56,7 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			savedEmployee = result.get();
 		} else {
 			// we didn't find the employee
-			throw new RuntimeException("Did not find employee with id - " + updatedEmployee.getId());
+			throw new IllegalArgumentException("Did not find employee with id - " + updatedEmployee.getId());
 		}
 		savedEmployee.setFirstName(updatedEmployee.getFirstName());
 		savedEmployee.setLastName(updatedEmployee.getLastName());
@@ -85,7 +85,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * of employees in each page and sorting order to be specified by the user
 	 */
 	@Override
-	public Page<Employee> findEmployeesCustomPagedAndCustomSortedByFirstName(int pageNum, int recordsNum, Direction direction) {
+	public Page<Employee> findEmployeesCustomPagedAndCustomSortedByFirstName(int pageNum, int recordsNum,
+			Direction direction) {
 		Pageable pageable = PageRequest.of(pageNum, recordsNum, direction, "firstName");
 		return employeeRepository.findAll(pageable);
 	}
